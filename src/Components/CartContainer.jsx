@@ -1,6 +1,11 @@
 import CartCard from "./CartCard";
 
-export default function CartContainer({cart, handleRemoveFromCart}){
+export default function CartContainer({
+    cart, 
+    handleRemoveFromCart,
+    handleRemoveQuantity,
+    handleAddQuantity,
+}){
     return (
         <div className="CartContainer">
             {cart.map((item)=>(
@@ -8,6 +13,8 @@ export default function CartContainer({cart, handleRemoveFromCart}){
                 key={item.id}
                 {...item}
                 handleRemoveFromCart={handleRemoveFromCart}
+                handleAddQuantity={handleAddQuantity}
+                handleRemoveQuantity={handleRemoveQuantity}
                 />
             ))}
         </div>

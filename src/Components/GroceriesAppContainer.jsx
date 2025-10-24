@@ -1,10 +1,18 @@
+import { useState } from "react";
 import CartContainer from "./CartContainer";
 import ProductContainer from "./ProductsContainer";
+import NavBar from "./NavBar";
 
-export default function GroceriesAppContainer({ products}) {
+export default function GroceriesAppContainer({products}) {
+    const [productQuantity, setProductQuantity] = useState(
+        products.map((prod) => {
+            return {id: prod.id,quantity: prod.quantity,productPrice: prod.price,};
+        })
+    );
+    const [cart, setCart] = useState([]);
     const handleAddQuantity = (productId) => {
         const newProductQuantity = productQuantity.map((prod)=>{
-            if(prod.id===productId&&prod.quantity>0)
+            if(prod.id===productId)
             {
                 return {...prod, quantity: prod.quantity + 1};
             }
@@ -12,11 +20,19 @@ export default function GroceriesAppContainer({ products}) {
             return prod;
         });
     };
-    const handleRemoveQuantity = (productId) => {
+    const handleRemoveQuantity = (productId, mode) => {
         const newProductQuantity = productQuantity.map((prod)=>{
-            if(prod.id===productId&&prod.quantity>0)
+            if (mode === "product")
             {
-                return {...prod, quantity: prod.quantity - 1};
+                if(prod.id===productId&&prod.quantity>0)
+                {
+                    return {...prod, quantity: prod.quantity - 1};
+                }
+            } else {
+                if(prod.id===productId&&prod.quantity>1)
+                {
+                    return {...prod, quantity: prod.quantity - 1};
+                }
             }
             setProductQuantity(newProductQuantity);
             return prod;
@@ -45,8 +61,17 @@ export default function GroceriesAppContainer({ products}) {
             alert("Item already exist in cart");
         }
     }
+    const handleRemoveFromCart = (cartItem) => {
+        const filteredCart = cart.filter((item) => item.id !== cartItem.id);
+        setCart(filteredCart);
+    };
     return (
         <div>
+            <div>
+                <NavBar
+                username={"Maxwell"}
+                />
+            </div>
             <div>
                 <ProductContainer
                 products={products}
@@ -56,7 +81,16 @@ export default function GroceriesAppContainer({ products}) {
                 handleRemoveQuantity={handleRemoveQuantity}
                 />
             </div>
-            <div></div>
+            <div>
+                <h1>Cart Items: {cart.length}</h1>
+                <p>{cart.length === 0 && "Cart is empty"}</p>
+                <CartContainer
+                cart={cart}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleAddQuantity={handleAddQuantity}
+                handleRemoveQuantity={handleRemoveQuantity}
+                />
+            </div>
         </div>
     );
 }

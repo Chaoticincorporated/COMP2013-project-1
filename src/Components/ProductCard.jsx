@@ -13,7 +13,8 @@ export default function ProductCard({
             <img src={img} alt=""/>
             <h3>{product}</h3>
             <QuantityCounter 
-                key={productQuantity.id}
+                id={productQuantity.id}
+                mode={"product"}
                 productQuantity={productQuantity.quantity}
                 handleAddQuantity={handleAddQuantity}
                 handleRemoveQuantity={handleRemoveQuantity}
