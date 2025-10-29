@@ -2,6 +2,8 @@ import QuantityCounter from "./QuantityCounter";
 
 export default function ProductCard({
     img,
+    name,
+    price,
     product,
     productQuantity,
     handleAddQuantity,
@@ -11,7 +13,7 @@ export default function ProductCard({
     return (
         <div className="ProductCard">
             <img src={img} alt=""/>
-            <h3>{product}</h3>
+            <h3>{name}</h3>
             <QuantityCounter 
                 id={productQuantity.id}
                 mode={"product"}
@@ -19,8 +21,8 @@ export default function ProductCard({
                 handleAddQuantity={handleAddQuantity}
                 handleRemoveQuantity={handleRemoveQuantity}
             />
-            <p>Price: ${product.price}</p>
-            <button onClick={()=>handleAddToCart(productQuantity)}></button>
+            <p>Price: ${price.replace("$", "")}</p>
+            <button onClick={()=>handleAddToCart(productQuantity)}>Add to Cart</button>
         </div>
     );
 }

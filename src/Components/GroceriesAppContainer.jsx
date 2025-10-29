@@ -3,7 +3,7 @@ import CartContainer from "./CartContainer";
 import ProductContainer from "./ProductsContainer";
 import NavBar from "./NavBar";
 
-export default function GroceriesAppContainer({products}) {
+export default function GroceriesAppContainer({products,}) {
     const [productQuantity, setProductQuantity] = useState(
         products.map((prod) => {
             return {id: prod.id,quantity: prod.quantity,productPrice: prod.price,};
@@ -39,7 +39,7 @@ export default function GroceriesAppContainer({products}) {
         });
     };
     const handleAddToCart = (productToAdd)=>{
-        const currentProduct = data.find((prod)=>prod.id===productToAdd.id);
+        const currentProduct = products.find((prod)=>prod.id===productToAdd.id);
         const productInCart = cart.find((item)=>item.id===productToAdd.id);
         if (productToAdd.quantity === 0)
         {

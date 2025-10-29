@@ -13,6 +13,9 @@ export default function ProductContainer({
             {products.map((product) => (
                 <ProductCard
                     key={product.id}
+                    img={product.image}
+                    name={product.productName}
+                    price={product.price}
                     {...product}
                     productQuantity={productQuantity.find(
                         (prod) => prod.id == product.id

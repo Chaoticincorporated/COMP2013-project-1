@@ -2,6 +2,7 @@ import QuantityCounter from "./QuantityCounter";
 
 export default function CartCard({
     id,
+    name,
     product,
     quantity,
     productPrice,
@@ -11,7 +12,8 @@ export default function CartCard({
 }) {
     return (
         <div className="CartCard">
-            <h2>{product}</h2>
+            <h2>{name}</h2>
+            <div>
             <QuantityCounter 
                 id={id}
                 mode={"cart"}
@@ -19,12 +21,17 @@ export default function CartCard({
                 handleAddQuantity={handleAddQuantity}
                 handleRemoveQuantity={handleRemoveQuantity}
             />
-            <p>Total Price: ${(quantity * productPrice).toFixed(2)}</p>
-            <button onClick={()=>(
+            </div>
+            <div>
+                <p>Total Price: ${(quantity * productPrice).toFixed(2)}</p>
+            </div>
+            <div>
+                <button onClick={()=>(
                 handleRemoveFromCart({id, product, quantity, productPrice})
             )}>
                 Remove Item
             </button>
+            </div>
         </div>
     );
 }
