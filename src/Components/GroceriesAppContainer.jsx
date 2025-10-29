@@ -16,9 +16,10 @@ export default function GroceriesAppContainer({products,}) {
             {
                 return {...prod, quantity: prod.quantity + 1};
             }
-            setProductQuantity(newProductQuantity);
             return prod;
         });
+        setProductQuantity(newProductQuantity);
+        
     };
     const handleRemoveQuantity = (productId, mode) => {
         const newProductQuantity = productQuantity.map((prod)=>{
@@ -34,9 +35,10 @@ export default function GroceriesAppContainer({products,}) {
                     return {...prod, quantity: prod.quantity - 1};
                 }
             }
-            setProductQuantity(newProductQuantity);
             return prod;
         });
+        setProductQuantity(newProductQuantity);
+        
     };
     const handleAddToCart = (productToAdd)=>{
         const currentProduct = products.find((prod)=>prod.id===productToAdd.id);

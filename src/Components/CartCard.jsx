@@ -5,6 +5,7 @@ export default function CartCard({
     name,
     product,
     quantity,
+    type,
     productPrice,
     handleRemoveFromCart,
     handleRemoveQuantity,
@@ -18,6 +19,7 @@ export default function CartCard({
                 id={id}
                 mode={"cart"}
                 productQuantity={quantity}
+                type={type}
                 handleAddQuantity={handleAddQuantity}
                 handleRemoveQuantity={handleRemoveQuantity}
             />
